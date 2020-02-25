@@ -3,7 +3,7 @@
   "oneOf": [
     {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "remoteType": {
           "description": "The libraryTarget of a remote build",

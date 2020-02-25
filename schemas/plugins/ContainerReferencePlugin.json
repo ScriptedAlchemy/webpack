@@ -10,51 +10,51 @@
           "type": "string",
           "minLength": 1
         },
-        "remotes": {
-          "description": "A list of remote scopes or namespaces that reference federated Webpack instances",
-          "anyOf": [
-            {
-              "description": "List of provided remote scopes",
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              }
-            },
-            {
-              "description": "A object of key value pairs for remote scopes",
-              "type": "object",
-              "additionalProperties": true,
-              "properties": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          ]
-        },
-        "overrides": {
-          "description": "A list of requests that should be overridable by the host container",
-          "anyOf": [
-            {
-              "description": "List of provided remote scopes",
-              "type": "array",
-              "items": {
-                "description": "The name of a remote scope",
-                "type": "string",
-                "minLength": 1
-              }
-            },
-            {
-              "description": "A object of key value pairs for remote scopes",
-              "type": "object",
-              "additionalProperties": true,
-              "properties": {
-                "description": "The name of a remote scope",
-                "type": "string"
-              }
-            }
-          ]
-        }
+//        "remotes": {
+//          "description": "A list of remote scopes or namespaces that reference federated Webpack instances",
+//          "anyOf": [
+//            {
+//              "description": "List of provided remote scopes",
+//              "type": "array",
+//              "items": {
+//                "type": "string",
+//                "minLength": 1
+//              }
+//            },
+//            {
+//              "description": "A object of key value pairs for remote scopes",
+//              "type": "object",
+//              "additionalProperties": true,
+//              "properties": {
+//                "type": "string",
+//                "minLength": 1
+//              }
+//            }
+//          ]
+//        },
+//        "overrides": {
+//          "description": "A list of requests that should be overridable by the host container",
+//          "anyOf": [
+//            {
+//              "description": "List of provided remote scopes",
+//              "type": "array",
+//              "items": {
+//                "description": "The name of a remote scope",
+//                "type": "string",
+//                "minLength": 1
+//              }
+//            },
+//            {
+//              "description": "A object of key value pairs for remote scopes",
+//              "type": "object",
+//              "additionalProperties": true,
+//              "properties": {
+//                "description": "The name of a remote scope",
+//                "type": "string"
+//              }
+//            }
+//          ]
+//        }
       }
     }
   ]

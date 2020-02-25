@@ -23,6 +23,21 @@
               "additionalProperties": true
             }
           ]
+        },
+        "overrides": {
+          "description": "A list of requests that should be overridable by the host container",
+          "anyOf": [
+            {
+              "description": "List of provided remote scopes",
+              "type": "array",
+              "minLength": 1
+            },
+            {
+              "description": "A object of key value pairs for remote scopes",
+              "type": "object",
+              "additionalProperties": true
+            }
+          ]
         }
       }
     }

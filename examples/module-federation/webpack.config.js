@@ -1,5 +1,6 @@
 const path = require("path");
 const { ModuleFederationPlugin } = require("../../").container;
+const StartupChunkDependenciesPlugin = require("../../lib/runtime/MfStartupChunkDependenciesPlugin");
 const rules = [
 	{
 		test: /\.js$/,
@@ -14,7 +15,8 @@ const rules = [
 ];
 const optimization = {
 	chunkIds: "named", // for this example only: readable filenames in production too
-	nodeEnv: "production" // for this example only: always production version of react
+	nodeEnv: "production", // for this example only: always production version of react
+	runtimeChunk: 'single'
 };
 const stats = {
 	chunks: true,
@@ -33,7 +35,10 @@ module.exports = (env = "development") => [
 		name: "app",
 		mode: env,
 		entry: {
-			app: "./src/index.js"
+			app: {
+				import: "./src/index.js",
+				asyncChunks: true
+			}
 		},
 		output: {
 			filename: "[name].js",
@@ -67,6 +72,10 @@ module.exports = (env = "development") => [
 						singleton: true // make sure only a single react module is used
 					}
 				}
+			}),
+			new StartupChunkDependenciesPlugin({
+				chunkLoading: "jsonp",
+				asyncChunkLoading: true
 			})
 		],
 		stats

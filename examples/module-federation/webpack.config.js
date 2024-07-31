@@ -46,14 +46,12 @@ module.exports = (env = "development") => [
 		entry: {
 			app: {
 				import: "./src/index.js",
-				asyncChunks: true
 			}
 		},
 		output: {
 			filename: "[name].js",
 			path: path.resolve(__dirname, "dist/aaa"),
 			publicPath: "dist/aaa/",
-asyncChunks: true,
 			// Each build needs a unique name
 			// to avoid runtime collisions
 			// The default uses "name" from package.json
@@ -83,10 +81,8 @@ asyncChunks: true,
 				}
 			}),
 			new StartupChunkDependenciesPlugin({
-				chunkLoading: "jsonp",
 				asyncChunkLoading: true
 			}),
-			// new MfStartupEntryChunkRuntime()
 		],
 		stats
 	},

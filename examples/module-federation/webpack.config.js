@@ -1,5 +1,6 @@
 const path = require("path");
 const { ModuleFederationPlugin } = require("../../").container;
+const StartupChunkDependenciesPlugin = require("../../lib/runtime/MfStartupChunkDependenciesPlugin");
 const rules = [
 	{
 		test: /\.js$/,
@@ -14,7 +15,17 @@ const rules = [
 ];
 const optimization = {
 	chunkIds: "named", // for this example only: readable filenames in production too
-	nodeEnv: "production" // for this example only: always production version of react
+	nodeEnv: "production", // for this example only: always production version of react
+	// runtimeChunk: 'single',
+	// splitChunks: {
+	// 	cacheGroups: {
+	// 		react: {
+	// 			test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+	// 			name: 'react_vendered',
+	// 			chunks: 'all',
+	// 		},
+	// 	},
+	// },
 };
 const stats = {
 	chunks: true,
@@ -33,13 +44,14 @@ module.exports = (env = "development") => [
 		name: "app",
 		mode: env,
 		entry: {
-			app: "./src/index.js"
+			app: {
+				import: "./src/index.js",
+			}
 		},
 		output: {
 			filename: "[name].js",
 			path: path.resolve(__dirname, "dist/aaa"),
 			publicPath: "dist/aaa/",
-
 			// Each build needs a unique name
 			// to avoid runtime collisions
 			// The default uses "name" from package.json
@@ -67,7 +79,10 @@ module.exports = (env = "development") => [
 						singleton: true // make sure only a single react module is used
 					}
 				}
-			})
+			}),
+			new StartupChunkDependenciesPlugin({
+				asyncChunkLoading: true
+			}),
 		],
 		stats
 	},
@@ -84,6 +99,10 @@ module.exports = (env = "development") => [
 		module: { rules },
 		optimization,
 		plugins: [
+			new StartupChunkDependenciesPlugin({
+				chunkLoading: "jsonp",
+				asyncChunkLoading: true
+			}),
 			new ModuleFederationPlugin({
 				// A unique name
 				name: "mfeBBB",
@@ -147,4 +166,4 @@ module.exports = (env = "development") => [
 		],
 		stats
 	}
-];
+]
